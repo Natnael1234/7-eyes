@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-jakarta)', 'sans-serif'],
+        display: ['var(--font-outfit)', 'sans-serif'],
+      },
       colors: {
         'purple-dark': '#4A148C',
         'purple-light': '#E8E0F5',

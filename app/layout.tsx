@@ -1,5 +1,18 @@
 import type { Metadata } from 'next'
+import { Outfit, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  display: 'swap',
+})
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Seven Eyes Multimedia and Communication',
@@ -12,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${outfit.variable} ${jakarta.variable}`}>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   )
 }

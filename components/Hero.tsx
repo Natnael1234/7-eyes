@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import heroImg from '@/app/Images/hero.jpg'
+import { useEffect, useState, useRef } from 'react'
 
 export default function Hero() {
   return (
@@ -46,25 +47,68 @@ export default function Hero() {
         </div>
 
         {/* Stats or Trust Indicators */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-10">
-          <div>
-            <h3 className="text-3xl font-bold text-white mb-1">10+</h3>
-            <p className="text-gray-400 text-sm">Years Experience</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-white mb-1">15+</h3>
-            <p className="text-gray-400 text-sm">Global Partners</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-white mb-1">100%</h3>
-            <p className="text-gray-400 text-sm">Impact Driven</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-white mb-1">24/7</h3>
-            <p className="text-gray-400 text-sm">Creative Passion</p>
-          </div>
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-white/10 pt-10">
+          <StatCard number={10} suffix="+" label="Years Experience" />
+          <StatCard number={15} suffix="+" label="Global Partners" />
+          <StatCard number={100} suffix="%" label="Impact Driven" />
+          <StatCard number={24} suffix="/7" label="Creative Passion" />
         </div>
       </div>
     </section>
+  )
+}
+
+function StatCard({ number, suffix, label }: { number: number, suffix: string, label: string }) {
+  const [count, setCount] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isVisible) return
+
+    let start = 0
+    const end = number
+    const duration = 2000
+    const incrementTime = Math.floor(duration / end)
+
+    const timer = setInterval(() => {
+      start += 1
+      setCount(start)
+      if (start === end) clearInterval(timer)
+    }, incrementTime)
+
+    return () => clearInterval(timer)
+  }, [isVisible, number])
+
+  return (
+    <div ref={ref} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group">
+      <h3 className="text-4xl md:text-5xl font-bold text-white mb-2 group-hover:text-yellow-brand transition-colors">
+        {count}{suffix}
+      </h3>
+      <p className="text-gray-400 text-sm font-medium uppercase tracking-wider group-hover:text-white transition-colors">
+        {label}
+      </p>
+    </div>
   )
 }

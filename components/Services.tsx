@@ -99,13 +99,14 @@ export default function Services() {
                     </h2>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 h-[800px] lg:h-[600px]">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 min-h-[600px] h-auto lg:h-[600px]">
                     {/* Service List */}
                     <div className="flex flex-col justify-between gap-3 h-full pr-2">
                         {services.map((service, index) => (
                             <div
                                 key={service.id}
                                 onMouseEnter={() => setActiveService(index)}
+                                onClick={() => setActiveService(index)}
                                 className={`group p-5 rounded-2xl cursor-pointer transition-all duration-300 border relative overflow-hidden ${activeService === index
                                     ? 'bg-gradient-to-r from-white/10 to-white/5 border-yellow-brand/50 shadow-lg shadow-yellow-brand/5 scale-[1.02]'
                                     : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10'

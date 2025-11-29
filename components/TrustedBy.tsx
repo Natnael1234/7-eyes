@@ -1,26 +1,67 @@
 'use client'
 
+import Image from 'next/image'
+import girlEffect from '@/app/Images/Trusted by/girl effect.jpg'
+import unicef from '@/app/Images/Trusted by/unicef.jpg'
+import unWomen from '@/app/Images/Trusted by/unwomen.jpg'
+import usaid from '@/app/Images/Trusted by/usaid.jpg'
+import saveChildren from '@/app/Images/Trusted by/savechildren.jpg'
+import jhpiego from '@/app/Images/Trusted by/jhpiego.jpg'
+import helvetas from '@/app/Images/Trusted by/helveta.jpg'
+import britishCouncil from '@/app/Images/Trusted by/british_council.jpg'
+import irc from '@/app/Images/Trusted by/International_rescue.jpg'
+import planInternational from '@/app/Images/Trusted by/plan international.jpg'
+
 const partners = [
-  'Girl Effect', 'UNICEF', 'UN Women', 'USAID', 'Save the Children',
-  'World Vision Ethiopia', 'Jhepiego', 'Helvetas Swiss', 'Samaritan Purse',
-  'British Council', 'IRC', 'Plan International'
+  { name: 'Girl Effect', logo: girlEffect },
+  { name: 'UNICEF', logo: unicef },
+  { name: 'UN Women', logo: unWomen },
+  { name: 'USAID', logo: usaid },
+  { name: 'Save the Children', logo: saveChildren },
+  { name: 'Jhepiego', logo: jhpiego },
+  { name: 'Helvetas Swiss', logo: helvetas },
+  { name: 'British Council', logo: britishCouncil },
+  { name: 'IRC', logo: irc },
+  { name: 'Plan International', logo: planInternational },
 ]
 
 export default function TrustedBy() {
   return (
-    <section className="py-16 bg-black border-t border-white/10">
-      <div className="container mx-auto px-6">
-        <p className="text-center text-gray-500 text-sm font-medium mb-8 uppercase tracking-widest">
+    <section className="py-16 border-t border-white/10 overflow-hidden">
+      <div className="container mx-auto px-6 mb-12">
+        <p className="text-center text-purple-dark/80 text-sm font-medium uppercase tracking-widest">
           Trusted by Global Organizations
         </p>
+      </div>
 
-        <div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
+      <div className="flex overflow-hidden space-x-16 group">
+        <div className="flex space-x-16 animate-marquee min-w-full shrink-0 items-center">
           {partners.map((partner, index) => (
             <div
-              key={index}
-              className="text-xl md:text-2xl font-bold text-white/30 hover:text-white transition-colors duration-300 cursor-default"
+              key={`p1-${index}`}
+              className="relative w-40 h-20 flex-shrink-0 hover:scale-110 transition-all duration-300"
             >
-              {partner}
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                fill
+                className="object-contain"
+              />
+            </div>
+          ))}
+        </div>
+        <div className="flex space-x-16 animate-marquee min-w-full shrink-0 items-center" aria-hidden="true">
+          {partners.map((partner, index) => (
+            <div
+              key={`p2-${index}`}
+              className="relative w-40 h-20 flex-shrink-0 hover:scale-110 transition-all duration-300"
+            >
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                fill
+                className="object-contain"
+              />
             </div>
           ))}
         </div>

@@ -15,7 +15,25 @@ module.exports = {
         'orange-light': '#FFE5CC',
         'beige': '#F5E6D3',
       },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 30s linear infinite',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.perspective': { 'perspective': '1000px' },
+        '.preserve-3d': { 'transform-style': 'preserve-3d' },
+        '.backface-hidden': { 'backface-visibility': 'hidden' },
+        '.rotate-y-180': { 'transform': 'rotateY(180deg)' },
+      })
+    },
+  ],
 }

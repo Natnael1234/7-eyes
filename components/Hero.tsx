@@ -1,22 +1,25 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
+import heroImg from '@/app/Images/hero.jpg'
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark pt-20">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-brand-primary/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-brand-secondary/20 rounded-full blur-[120px] animate-pulse delay-1000" />
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={heroImg}
+          alt="Hero Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60" /> {/* Overlay for readability */}
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
-        <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
-          <span className="text-brand-accent font-medium tracking-wide text-sm uppercase">
-            Est. 2025 • Addis Ababa, Ethiopia
-          </span>
-        </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display text-white mb-8 leading-tight">
           Empowering <span className="text-gradient">Stories</span>,<br />
@@ -24,7 +27,7 @@ export default function Hero() {
         </h1>
 
         <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
-          Impactful Experiences, Meaningful Change. We are a creative powerhouse dedicated to crafting transformative media that inspires action.
+          Impactful Experiences, Meaningful Change.
         </p>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">

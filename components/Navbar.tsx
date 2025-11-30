@@ -18,10 +18,10 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrolled ? 'py-4' : 'py-6'}`}>
-      <div className={`container mx-auto px-4 md:px-6 transition-all duration-500 ${scrolled ? 'max-w-7xl' : 'max-w-full'}`}>
+      <div className={`container mx-auto px-3 md:px-6 transition-all duration-500 ${scrolled ? 'max-w-7xl' : 'max-w-full'}`}>
         <div className={`
           relative flex flex-col md:flex-row items-center justify-between 
-          px-6 py-3 rounded-2xl transition-all duration-500
+          px-3 md:px-6 py-3 rounded-2xl transition-all duration-500
           ${scrolled
             ? 'bg-purple-dark/80 backdrop-blur-md shadow-2xl border border-white/10'
             : 'bg-transparent'

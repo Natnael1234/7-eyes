@@ -5,17 +5,24 @@ import Image from 'next/image'
 import heroImg from '@/app/Images/hero.jpg'
 import { useEffect, useState, useRef } from 'react'
 
-export default function Hero() {
+export default function Hero({ title, subtitle, experienceYears, partnersCount, heroImage }: {
+  title?: string,
+  subtitle?: string,
+  experienceYears?: number,
+  partnersCount?: number,
+  heroImage?: string
+}) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark pt-20">
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src={heroImg}
+          src={heroImage || heroImg}
           alt="Hero Background"
           fill
           className="object-cover"
           priority
+          unoptimized={!!heroImage}
         />
         <div className="absolute inset-0 bg-black/60" /> {/* Overlay for readability */}
       </div>
@@ -23,12 +30,11 @@ export default function Hero() {
       <div className="container mx-auto px-6 relative z-10 text-center">
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display text-white mb-8 leading-tight">
-          Empowering <span className="text-gradient">Stories</span>,<br />
-          Empowering <span className="text-gradient">Community</span>
+          {title || 'Seven Eyes Multimedia'}
         </h1>
 
         <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
-          Impactful Experiences, Meaningful Change.
+          {subtitle || 'Impactful Experiences, Meaningful Change.'}
         </p>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
@@ -48,8 +54,8 @@ export default function Hero() {
 
         {/* Stats or Trust Indicators */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-t border-white/10 pt-10">
-          <StatCard number={10} suffix="+" label="Years Experience" />
-          <StatCard number={15} suffix="+" label="Global Partners" />
+          <StatCard number={experienceYears || 0} suffix="+" label="Years Experience" />
+          <StatCard number={partnersCount || 0} suffix="+" label="Global Partners" />
           <StatCard number={100} suffix="%" label="Impact Driven" />
           <StatCard number={24} suffix="/7" label="Creative Passion" />
         </div>
@@ -85,18 +91,23 @@ function StatCard({ number, suffix, label }: { number: number, suffix: string, l
   }, [])
 
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || number <= 0) return
 
     let start = 0
     const end = number
-    const duration = 2000
-    const incrementTime = Math.floor(duration / end)
+    // Calculate duration based on the number to keep it reasonable
+    // For small numbers, simple interval; for large, faster
+    const totalDuration = 2000
+    const frameRate = 30 // updates per second
+    const totalFrames = (totalDuration / 1000) * frameRate
+    const increment = Math.ceil(end / totalFrames)
 
+    // Use fallback interval if calculated is too small or weird
     const timer = setInterval(() => {
-      start += 1
+      start = Math.min(start + increment, end) // Ensure we don't overshoot
       setCount(start)
-      if (start === end) clearInterval(timer)
-    }, incrementTime)
+      if (start >= end) clearInterval(timer)
+    }, 1000 / frameRate)
 
     return () => clearInterval(timer)
   }, [isVisible, number])

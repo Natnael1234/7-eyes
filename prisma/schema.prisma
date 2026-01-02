@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Experience {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  icon        String?  // Could be an SVG string or an icon name
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Partner {
+  id        String   @id @default(uuid())
+  name      String
+  logoUrl   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteConfig {
+  id              String   @id @default("config") // Singleton ID
+  
+  // Hero Section
+  heroTitle       String   @default("Seven Eyes Multimedia")
+  heroSubtitle    String   @default("Empowering Stories. Empowering Community. Impactful Experiences. Meaningful Change.")
+  heroImage       String?
+
+  // About Section
+  aboutText       String?
+  mission         String?
+  vision          String?
+  aboutImage      String?
+
+  // Contact Info
+  email           String   @default("info@seveneyes.com")
+  phone           String   @default("+251 911 234 567")
+  address         String   @default("Addis Ababa, Ethiopia")
+  
+  // Social Links
+  facebook        String?
+  instagram       String?
+  linkedin        String?
+
+  // Stats
+  experienceYears Int      @default(0)
+  partnersCount   Int      @default(0)
+  visits          Int      @default(0)
+
+  updatedAt       DateTime @updatedAt
+}

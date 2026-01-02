@@ -25,7 +25,12 @@ const partners = [
   { name: 'Plan International', logo: planInternational },
 ]
 
-export default function TrustedBy() {
+export default function TrustedBy({ initialPartners }: { initialPartners?: any[] }) {
+  // Use DB partners or fallback to static list
+  const displayPartners = initialPartners && initialPartners.length > 0
+    ? initialPartners.map(p => ({ name: p.name, logo: p.logoUrl }))
+    : partners
+
   return (
     <section className="py-16 border-t border-white/10 overflow-hidden">
       <div className="container mx-auto px-6 mb-12">
@@ -36,7 +41,7 @@ export default function TrustedBy() {
 
       <div className="flex overflow-hidden space-x-16 group">
         <div className="flex space-x-16 animate-marquee min-w-full shrink-0 items-center">
-          {partners.map((partner, index) => (
+          {displayPartners.map((partner, index) => (
             <div
               key={`p1-${index}`}
               className="relative w-40 h-20 flex-shrink-0 hover:scale-110 transition-all duration-300"
@@ -46,12 +51,14 @@ export default function TrustedBy() {
                 alt={partner.name}
                 fill
                 className="object-contain"
+                // Handle external URLs vs static imports
+                unoptimized={typeof partner.logo === 'string'}
               />
             </div>
           ))}
         </div>
         <div className="flex space-x-16 animate-marquee min-w-full shrink-0 items-center" aria-hidden="true">
-          {partners.map((partner, index) => (
+          {displayPartners.map((partner, index) => (
             <div
               key={`p2-${index}`}
               className="relative w-40 h-20 flex-shrink-0 hover:scale-110 transition-all duration-300"
@@ -61,6 +68,7 @@ export default function TrustedBy() {
                 alt={partner.name}
                 fill
                 className="object-contain"
+                unoptimized={typeof partner.logo === 'string'}
               />
             </div>
           ))}

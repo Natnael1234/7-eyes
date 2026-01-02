@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import heroImg from '@/app/Images/hero.jpg'
 
-export default function WhoWeAre() {
+export default function WhoWeAre({ aboutText, mission, vision, aboutImage }: { aboutText?: string, mission?: string, vision?: string, aboutImage?: string }) {
   return (
     <section className="py-24 bg-white relative overflow-hidden" id="about">
       {/* Background Decorative Elements */}
@@ -27,11 +27,8 @@ export default function WhoWeAre() {
                   Ignite Change
                 </span>
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Seven Eyes Multimedia and Communication PLC is a newly established creative powerhouse based in Addis Ababa. We bring together seasoned professionals with over a decade of experience in film, documentary, and behavior change communication.
-              </p>
-              <p className="text-gray-600 leading-relaxed mt-4">
-                Although young as an entity, our foundation is built on individual excellence. We are dedicated to crafting transformative media experiences that not only entertain but inspire real social change.
+              <p className="text-gray-600 text-lg leading-relaxed whitespace-pre-line">
+                {aboutText || 'Seven Eyes Multimedia and Communication PLC is a newly established creative powerhouse based in Addis Ababa. We bring together seasoned professionals with over a decade of experience in film, documentary, and behavior change communication.'}
               </p>
             </div>
 
@@ -50,8 +47,8 @@ export default function WhoWeAre() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-700 transition-colors">Our Vision</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    To become Ethiopia’s leading creative production company, delivering world-class storytelling that promotes youth empowerment and social transformation.
+                  <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
+                    {vision || 'To become Ethiopia’s leading creative production company, delivering world-class storytelling that promotes youth empowerment and social transformation.'}
                   </p>
                 </div>
               </div>
@@ -67,8 +64,8 @@ export default function WhoWeAre() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-yellow-600 transition-colors">Our Mission</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    To combine storytelling and technology to engage young people and women, sparking awareness, empathy, and positive behavioral change.
+                  <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
+                    {mission || 'To combine storytelling and technology to engage young people and women, sparking awareness, empathy, and positive behavioral change.'}
                   </p>
                 </div>
               </div>
@@ -80,10 +77,11 @@ export default function WhoWeAre() {
           <div className="relative hidden lg:block h-full min-h-[600px]">
             <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500 border-4 border-white">
               <Image
-                src={heroImg}
+                src={aboutImage || heroImg}
                 alt="About Seven Eyes"
                 fill
                 className="object-cover"
+                unoptimized={!!aboutImage}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 

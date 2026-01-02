@@ -64,7 +64,7 @@ export default function Navbar() {
             <NavLink href="#home" scrolled={scrolled}>Home</NavLink>
             <NavLink href="#about" scrolled={scrolled}>About</NavLink>
             <NavLink href="#services" scrolled={scrolled}>Services</NavLink>
-            <NavLink href="#experience" scrolled={scrolled}>Experience</NavLink>
+            <NavLink href="/experience" scrolled={scrolled}>Experience</NavLink>
             <NavLink href="#contact" scrolled={scrolled} isButton>Contact Us</NavLink>
           </div>
 
@@ -78,7 +78,7 @@ export default function Navbar() {
             <MobileNavLink href="#home" onClick={() => setIsOpen(false)}>Home</MobileNavLink>
             <MobileNavLink href="#about" onClick={() => setIsOpen(false)}>About Us</MobileNavLink>
             <MobileNavLink href="#services" onClick={() => setIsOpen(false)}>Services</MobileNavLink>
-            <MobileNavLink href="#experience" onClick={() => setIsOpen(false)}>Experience</MobileNavLink>
+            <MobileNavLink href="/experience" onClick={() => setIsOpen(false)}>Experience</MobileNavLink>
             <MobileNavLink href="#contact" onClick={() => setIsOpen(false)} highlight>Contact Us</MobileNavLink>
           </div>
         </div>

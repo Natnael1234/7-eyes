@@ -2,7 +2,13 @@
 
 import { useState } from 'react'
 
-export default function Contact() {
+interface ContactProps {
+  email?: string
+  phone?: string
+  address?: string
+}
+
+export default function Contact({ email, phone, address }: ContactProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -60,7 +66,7 @@ export default function Contact() {
                   Extraordinary
                 </span>
               </h2>
-              <p className="text-purple-light/80 text-lg leading-relaxed max-w-lg">
+              <p className="text-purple-light/80 text-lg leading-relaxed max-lg">
                 Ready to bring your vision to life? We're here to help you tell your story and make a lasting impact.
               </p>
             </div>
@@ -75,7 +81,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-white font-semibold text-lg">Visit Us</h3>
-                  <p className="text-purple-light/60">Addis Ababa, Ethiopia</p>
+                  <p className="text-purple-light/60">{address || 'Addis Ababa, Ethiopia'}</p>
                 </div>
               </div>
 
@@ -87,7 +93,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-white font-semibold text-lg">Email Us</h3>
-                  <p className="text-purple-light/60">info@seveneyes.com</p>
+                  <p className="text-purple-light/60">{email || 'info@seveneyes.com'}</p>
                 </div>
               </div>
 
@@ -99,7 +105,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-white font-semibold text-lg">Call Us</h3>
-                  <p className="text-purple-light/60">+251 911 234 567</p>
+                  <p className="text-purple-light/60">{phone || '+251 911 234 567'}</p>
                 </div>
               </div>
             </div>
